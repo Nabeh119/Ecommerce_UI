@@ -1,3 +1,4 @@
+import 'package:ecommerce_ui/details.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget {
@@ -184,46 +185,60 @@ class _HomepageState extends State<Homepage> {
               ),
               itemCount: Items.length,
               itemBuilder: (context, index) {
-                return Card(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        // padding: EdgeInsets.all(20),
-                        width: 300,
-                        color: Colors.grey[200],
-                        child: Image.asset(
-                          "${Items[index]["Image"]}",
-                          height: 110,
-                          fit: BoxFit.fill,
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ItemDetails(
+                            //هذه الصفحة تستقبل بيانات المنتج من شاشة
+                            data: Items[index], //فكرة جميلة
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          // padding: EdgeInsets.all(20),
+                          width: 300,
+                          color: Colors.grey[200],
+                          child: Image.asset(
+                            "${Items[index]["Image"]}",
+                            height: 110,
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "${Items[index]["title"]}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        "${Items[index]["Description"]}",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
+                        Text(
+                          "${Items[index]["title"]}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "${Items[index]["price"]}",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orange,
+                        SizedBox(
+                          height: 2,
                         ),
-                      ),
-                    ],
+                        Text(
+                          "${Items[index]["Description"]}",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "${Items[index]["price"]}",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.orange,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
